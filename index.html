@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    <!--                                           \|/
+                                                  --O--               |
+    This template was built with love by....       /|\                |                  V
+     ______                                                         .-'-.                     v 
+    |  ____|                                                       ' ___ '                  v  
+    | |____   ____ _ _ __   ___  ___  ___                ---------'  .-.  '---------
+    |  __\ \ / / _` | '_ \ / _ \/ _ \/ __|    ____________________'  '-'  '____________________
+    | |___\ V / (_| | | | |  __/ (_) \__ \   '''-|---|--/    \==][^',_m_,'^][==/    \--|---|-'''
+    |______\_/ \__,_|_| |_|\___|\___/|___/              \    /  ||/   H   \||  \    /
+                                                         '--'   OO   O|O   OO   '--'
+    ~*-,._.,-*~'`^`'~*-,._.,-*~'`^`'~*-,._.
+        
+    -->
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <title>Design System | Varanasi | Evaneos.com</title>
+        <meta name="description" content="Design system for Varanasi project by Evaneos" />
+        <meta name="generator" content="kss-node" />
+
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arvo:400,700|Droid+Sans:400,700">
+        <link rel="stylesheet" href="public/kss.css" />
+        <link rel="stylesheet" href="/varanasi/stylesheets/demo-fr-debug.css" />
+        <!--[if lt IE 9]>
+        <script src="public/html5shiv.js"></script>
+        <![endif]-->
+        <link rel="shortcut icon" href="http://www.evaneos.com/images/main/favicon.png" type="image/png" />
+    </head>
+    <body id="kss-node">
+        <div class="kss-sidebar">
+            <div class="kss-sidebar-inner">
+                <h1 class="kss-doc-title"><a href="./index.html">Style</a></h1>
+                <div class="kss-doc-subtitle">Frontend style guide</div>
+                <nav class="kss-nav">
+                    <ul class="kss-menu" data-kss-ref="{{rootNumber}}">
+
+                        <li class="kss-menu-item">
+                            <a href="./index.html">
+                                <span class="kss-name">Overview</span>
+                            </a>
+                        </li>
+
+                        {{#eachRoot}}
+                          <li class="kss-menu-item">
+                            <a href="section-{{reference}}.html">
+                                <span class="kss-ref">{{reference}}</span>
+                                <span class="kss-name">{{header}}</span>
+                            </a>
+                            <ul>
+                            {{#eachSection reference}}
+                                {{#ifDepth 2}}
+                                    <li>
+                                        <a href="section-{{../../reference}}.html#section-{{reference}}">
+                                            <span class="kss-ref">{{reference}}</span>
+                                            <span class="kss-name">{{header}}</span>
+                                        </a>
+                                    </li>
+                                {{/ifDepth}}
+                                {{#ifDepth 3}}
+                                    <li class="kss-menu-depth-3">
+                                        <a href="section-{{../../reference}}.html#section-{{reference}}">
+                                            <span class="kss-ref">{{reference}}</span>
+                                            <span class="kss-name">{{header}}</span>
+                                        </a>
+                                    </li>
+                                {{/ifDepth}}
+                                
+                            {{/eachSection}}
+                            </ul>
+                          </li>
+                        {{/eachRoot}}
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    
+        <div class="kss-content">
+            <article class="kss-article">
+
+            {{#if overview}}
+                <section id="section-0" class="kss-section kss-overview">
+                    {{html overview}}
+                </section>
+            {{else}}
+                {{#eachSection rootNumber}}
+                    <section id="section-{{reference}}" class="kss-section kss-depth-{{refDepth}}">
+                        <div class="kss-title"><span class="kss-ref">{{reference}}</span> {{header}}</div>
+                        {{#ifAny markup modifiers}}
+                            {{#if description}}
+                            <div class="kss-description">
+                                {{html description}}
+                            </div>
+                            {{/if}}
+                            <div class="kss-modifier-block">
+                                {{#eachModifier}}
+                                <div class="kss-modifier">
+                                    <div class="kss-modifier-head">
+                                        <div class="kss-modifier-name">{{name}}</div>
+                                        <div class="kss-modifier-description">
+                                            {{html description}}
+                                        </div>
+                                    </div>
+                                    <div class="kss-modifier-example">
+                                        {{modifierMarkup}}
+                                    </div>
+                                </div>
+                                {{/eachModifier}}
+                                <div class="kss-markup">
+                                    <pre><code data-language="html">{{markup}}</code></pre>
+                                </div>
+                            </div>
+                            {{else}}
+                                {{#if description}}
+                                <div class="kss-description">
+                                    {{html description}}
+                                </div>
+                                {{/if}}
+                        {{/ifAny}}
+                    </section>
+                {{/eachSection}}
+            {{/if}}
+            </article>
+    
+            <footer class="kss-footer">
+                <div>Style documentation generated from less sources thanks to <a href="https://github.com/hughsk/kss-node">kss-node</a>.</div>
+                <div>Style template by <a href="http://www.evaneos.com">Evaneos</a></div>
+            </footer>
+        </div>
+        
+        <script src="public/kss.js"></script>
+        <script src="public/jquery-1.9.1.min.js"></script>
+        <!--[if gt IE 8]><!-->
+        <script src="public/rainbow.min.js"></script>
+        <!--<![endif]-->
+        <script src="public/main.js"></script>
+    </body>
+</html>

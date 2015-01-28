@@ -1,0 +1,432 @@
+@bg-color: #fff;
+@text-color: #222;
+
+@brand-color: #111;
+@brand-subtitle-color: #777;
+@brand-font-size: 40px;
+
+@sidebar-bg: #f1f2f3;
+@sidebar-entry-main-color: #222;
+@sidebar-entry-main-bg: transparent;
+@sidebar-entry-main-color-hover: #111;
+@sidebar-entry-main-bg-hover: darken(@sidebar-bg, 10%);
+@sidebar-entry-main-color-active: #fff;
+@sidebar-entry-main-bg-active: #d33;
+
+@sidebar-entry-border-color: darken(@sidebar-bg, 10%);
+@sidebar-entry-color: #555;
+@sidebar-entry-bg: transparent;
+@sidebar-entry-color-hover: #222;
+@sidebar-entry-bg-hover: darken(@sidebar-bg, 10%);
+@sidebar-fontsize: 16px;
+
+@content-maxwidth: 1100px;
+@sidebar-width: 300px;
+
+@horizontal-padding: 25px;
+@vertical-padding: 15px;
+
+@border-color: #e3e3e3;
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+// Import rainbow.js highlighter.
+@import "rainbow-github";
+
+#kss-node {
+    background: @bg-color;
+
+    // Mixins
+    .base-styles() {
+        line-height: 1.3;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: @text-color;
+    }
+    .doc-styles() {
+        .base-styles();
+        line-height: 1.5;   // Override
+        word-wrap: break-word;
+        font-size: 16px;
+        h1, h2, h3, h4, h5, h6 {
+            display: block;
+            line-height: 1.3;
+            font-weight: bold;
+        }
+        h1 {
+            margin: 60px 0 20px;
+            border-bottom: 2px solid @border-color;
+            font-size: 36px;
+        }
+        h2 {
+            margin: 30px 0 15px;
+            font-size: 28px;
+        }
+        h3 {
+            margin: 20px 0 15px;
+            font-size: 20px;
+        }
+        h4, h5, h6 {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+        p, ul, ol, blockquote, pre {
+            display: block;
+            margin: 15px 0;
+        }
+        ul {
+            list-style-type: square;
+            list-style-position: outside;
+            padding-left: 25px;
+        }
+        ol {
+            list-style-type: decimal;
+            list-style-position: outside;
+            padding-left: 25px;
+        }
+        blockquote {
+            margin-left: 2px;
+            padding: 0 0 0 16px;
+            border-left: 2px solid @border-color;
+        }
+        pre {
+            .pre-styles();
+            overflow: auto;
+            padding: 8px 12px;
+            border: 1px solid @border-color;
+        }
+        a, img, strong, em, code {
+            display: inline;
+        }
+        a {
+            color: #08a;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+                color: #068;
+            }
+        }
+        img {
+            vertical-align: bottom;
+        }
+        a img {
+            border: none;
+        }
+        strong {
+            font-weight: bold;
+            font-style: normal;
+        }
+        em {
+            font-weight: normal;
+            font-style: italic;
+        }
+        code {
+            .code-styles();
+            padding: 1px 2px;
+            border: 1px solid @border-color;
+            vertical-align: 1px;
+        }
+        pre > code {
+            padding: 0;
+            border: none;
+        }
+    }
+
+
+    .pre-styles() {
+        white-space: pre;
+        word-wrap: normal;
+    }
+
+    .code-styles() {
+        line-height: 1.5;
+        font-size: 13px;
+        font-family: Consolas, Menlo,'Liberation Mono', Courier, monospace;
+        color: @text-color
+    }
+
+    .clearfix() {
+        &:before,
+        &:after {
+            content: " ";
+            display: table;
+        }
+        &:after {
+            clear: both;
+        }
+    }
+
+    .ellipsis() {
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+
+    // Layout
+    .kss-wrapper {
+        .clearfix();
+        width: 100%;
+    }
+
+    // Sidebar
+    .kss-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: @sidebar-width;
+        overflow: auto;
+        background: @sidebar-bg;
+    }
+
+    .kss-sidebar-inner {
+        padding: @vertical-padding @horizontal-padding;
+    }
+  
+    // Document title
+    .kss-doc-title {
+        .base-styles();
+        color: @brand-color;
+        text-align: center;
+        font-size: @brand-font-size;
+        font-weight: normal;
+        margin: 0;
+        padding: 0;
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+    }
+
+    .kss-doc-subtitle {
+        .base-styles();
+        text-align: center;
+        color: @brand-subtitle-color;
+        font-size: 20px;
+    }
+
+    // Menu
+    .kss-nav {
+        margin: @vertical-padding 0;
+    }
+
+    .kss-menu {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        text-align: left;
+        > .kss-menu-item {
+            .base-styles();
+            margin: 0;
+            padding: 0;
+            > a {
+                display: block;
+                .clearfix();
+                padding: @sidebar-fontsize*.3 @sidebar-fontsize/2;
+                margin: 2px 0;
+                font-size: @sidebar-fontsize;
+                text-decoration: none;
+                font-weight: bold;
+                color: @sidebar-entry-main-color;
+                background: @sidebar-entry-main-bg;
+                border-radius: 2px;
+                &:hover {
+                    color: @sidebar-entry-main-color-hover;
+                    background: @sidebar-entry-main-bg-hover;
+                }
+                > .kss-ref {
+                    margin-right: 10px;
+                    float:left;
+                }
+            }
+            &.kss-active > a {
+                color: @sidebar-entry-main-color-active;
+                background: @sidebar-entry-main-bg-active;
+            }
+            > ul {
+                padding: 0 0 @vertical-padding/2 0;
+                margin: 0 0 @vertical-padding/2 0;
+                border-bottom: 1px solid @sidebar-entry-border-color;
+                li {
+                    list-style-type: none;
+                    padding: 0;
+                    margin: 0;
+                    &.kss-menu-depth-3 a{
+                        padding-left: @sidebar-fontsize;
+                    }
+                    &.kss-menu-depth-4 a{
+                        padding-left: 1.5 * @sidebar-fontsize;
+                    }
+                }
+                a {
+                    padding: @sidebar-fontsize/4 @sidebar-fontsize/2;
+                    display: block;
+                    .clearfix();
+                    text-decoration: none;
+                    font-size: @sidebar-fontsize;
+                    color: @sidebar-entry-color;
+                    background: @sidebar-entry-bg;
+                    &:hover {
+                        color: @sidebar-entry-color-hover;
+                        background: @sidebar-entry-bg-hover;
+                    }
+                    > .kss-ref {
+                        margin-right: 10px;
+                        float:left;
+                    }
+                }
+                    
+            }
+        }
+    }
+
+    // Sidebar entries style
+    .kss-depth-1 {
+        .kss-title {
+            font-size: 32px;
+            background: #eaeaea;
+            padding: 5px 10px;
+            margin-left: -10px;
+            margin-right: -10px;
+            margin-top: .3em;
+            margin-bottom: .5em;
+        }   
+    }
+    .kss-depth-2 {
+        .kss-title {
+            font-size: 28px;
+            border-bottom: 1px solid #eaeaea;
+            margin-top: .3em;
+            margin-bottom: .5em;
+        }
+    }
+    .kss-depth-3 {
+        .kss-title {
+            font-size: 24px;
+            margin-top: .3em;
+            margin-bottom: .5em;
+        }
+    }
+    .kss-depth-4 {
+        .kss-title {
+            font-size: 22px;
+            margin-top: .3em;
+            margin-bottom: .5em;
+        }
+    }
+
+
+    // Documentation content
+    // Content column
+
+    .kss-content {
+        margin: 0 auto;
+        max-width: @content-maxwidth;
+        padding: @vertical-padding @horizontal-padding @vertical-padding @horizontal-padding;
+        @media (max-width: 1750px) {
+                width: 900px;
+        }
+        @media (max-width: 1500px) {
+                width: 900px;
+                margin: 0 0 0 @sidebar-width;
+        }
+        @media (max-width: 1180px) {
+                width: auto;
+                margin: 0 0 0 @sidebar-width;
+
+        }
+        .kss-content{
+            margin-left: 0;
+        }
+    }
+
+    // Section
+    .kss-section {
+        padding-bottom: @vertical-padding;
+    }
+
+    // Overview content
+    .kss-overview {
+        .doc-styles();
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: 3px;
+        }
+    }
+
+    // Description
+    .kss-description {
+        .doc-styles();
+    }
+
+    // Modifier box
+    .kss-modifier-block {
+    }
+
+    // Modifiers
+    .kss-modifier {
+        margin-bottom: @vertical-padding;
+        &:first-child {
+            border: none;
+        }
+    }
+
+    .kss-modifier-head {
+        .doc-styles();
+        padding:4px 10px;
+        background: #dfdfdf;
+        border-top: 1px solid #dadada;
+        p, ul, ol, blockquote, pre {
+            margin: 0;
+        }
+        code {
+            color: inherit;
+        }
+        .kss-modifier-name {
+            float: left;
+            margin-right: 1.5em;
+            font-weight: bold;
+        }
+        .kss-modifier-description {
+            overflow: hidden;
+            color: #888;
+        }
+    }
+
+    .kss-modifier-example {
+        padding: 25px 20px;
+        transition: background .2s;
+        background: transparent url('bg-sample.svg');
+        &:hover {
+            background-color: #ccc;
+        }
+    }
+
+    // Markup
+    .kss-markup {
+        pre {
+            .pre-styles();
+            overflow: auto;
+            margin: 0;
+            padding: 8px 16px;
+            border: 1px solid @border-color;
+        }
+        code {
+            .code-styles();
+        }
+    }
+
+    // Copyright
+    .kss-footer {
+        .doc-styles();
+        margin: 80px 0 20px;
+        padding: 8px 0 0;
+        border-top: 2px solid @border-color;
+        font-size: 12px;
+    }
+}

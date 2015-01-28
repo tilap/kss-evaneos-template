@@ -1,0 +1,26 @@
+{
+  "name": "evaneos-kss-template",
+  "description": "A template for your kss documentation",
+  "version": "0.1",
+  "keywords": [
+    "kss",
+    "css",
+    "less",
+    "scss"
+    "front-end",
+    "documentation",
+    "web"
+  ],
+  "homepage": "",
+  "main": [
+    "index.html"
+  ],
+  "ignore": [
+    
+  ],
+  "dependencies": {
+    "jquery": "1.9.1",
+    'rainbow': "1.2",
+    "html5shiv": "3.7.2"
+  }
+}
